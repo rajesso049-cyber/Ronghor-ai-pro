@@ -1,0 +1,15 @@
+# One-click backend on Render: Dashboard > New > Blueprint > pick this repo.
+services:
+  - type: web
+    name: ronghor-ai-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # Render asks you to paste it; it is never stored in git
+      - key: APP_ACCESS_KEY
+        generateValue: true  # Render creates a strong random key; copy it into the app
